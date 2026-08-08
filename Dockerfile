@@ -8,7 +8,6 @@ RUN apk add --no-cache \
     unbound \
     curl \
     ca-certificates
-    
 
 RUN mkdir -p \
     /etc/unbound/conf.d \

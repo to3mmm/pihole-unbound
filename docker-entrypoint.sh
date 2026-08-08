@@ -12,7 +12,7 @@ fi
 
 if [ ! -f "$ROOTKEY" ]; then
     echo "Creating DNSSEC root key..."
-    unbound-anchor -a "$ROOTKEY"
+    unbound-anchor -a "$ROOTKEY" || exit 1
 fi
 
 echo "Checking configuration..."
