@@ -22,7 +22,4 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 EXPOSE 53/tcp
 EXPOSE 53/udp
 
-HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
-
-
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
