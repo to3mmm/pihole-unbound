@@ -1,19 +1,28 @@
 FROM alpine:3.22
 
+LABEL org.opencontainers.image.title="Pi-hole Unbound"
+LABEL org.opencontainers.image.description="Recursive DNS resolver optimized for Pi-hole"
+LABEL org.opencontainers.image.source="https://github.com/to3mmm/pihole-unbound"
+
 RUN apk add --no-cache \
     unbound \
+    unbound-anchor \
     curl \
     ca-certificates
 
 RUN mkdir -p \
-    /etc/unbound \
+    /etc/unbound/conf.d \
     /var/lib/unbound
 
-COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+COPY config/ /etc/unbound/
+COPY docker-entrypoint.sh /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 EXPOSE 53/tcp
 EXPOSE 53/udp
+
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+CMD drill @127.0.0.1 github.com >/dev/null || exit 1
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
