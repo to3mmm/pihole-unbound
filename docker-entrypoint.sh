@@ -10,6 +10,11 @@ if [ ! -f "$HINTS" ]; then
     curl -fsSL https://www.internic.net/domain/named.cache -o "$HINTS"
 fi
 
+if [ ! -s "$HINTS" ]; then
+    echo "Failed to download root hints"
+    exit 1
+fi
+
 if [ ! -f "$ROOTKEY" ]; then
     echo "Creating DNSSEC root key..."
     unbound-anchor -a "$ROOTKEY" || exit 1
