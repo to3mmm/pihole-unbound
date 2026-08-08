@@ -6,9 +6,9 @@ LABEL org.opencontainers.image.source="https://github.com/to3mmm/pihole-unbound"
 
 RUN apk add --no-cache \
     unbound \
-    unbound-anchor \
     curl \
     ca-certificates
+    
 
 RUN mkdir -p \
     /etc/unbound/conf.d \
