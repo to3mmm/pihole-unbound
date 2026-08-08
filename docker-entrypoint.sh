@@ -15,5 +15,8 @@ if [ ! -f "$ROOTKEY" ]; then
     unbound-anchor -a "$ROOTKEY"
 fi
 
+echo "Checking configuration..."
+unbound-checkconf "$CONFIG"
+
 echo "Starting Unbound..."
 exec unbound -d -c "$CONFIG"

@@ -23,6 +23,6 @@ EXPOSE 53/tcp
 EXPOSE 53/udp
 
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
-CMD drill @127.0.0.1 github.com >/dev/null || exit 1
+
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
